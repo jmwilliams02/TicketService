@@ -50,12 +50,13 @@ public class Venue {
 		int [] checkAvailability(int amount){
 			int [] openSeats = null;
 			
-			if(amount < numOfSeats) {
+			if(amount < availableSeats) {
 				openSeats = new int[amount + 1];
 				
-				for(int index = 0, osIndex = 1; index < numOfSeats && osIndex <= amount; index++, osIndex ++){
+				for(int index = 0, osIndex = 1; index < numOfSeats && osIndex <= amount; index++){
 					if(totalSeats[index].isAvailable(index)){
 						openSeats[osIndex] = index;
+						osIndex ++;
 						openSeats[0] ++;
 					}
 				}
@@ -66,8 +67,8 @@ public class Venue {
 		
 		// reserve customer's seat
 		void reserveSeats(String name, int [] seatList){
-			for(int index = 1; index <= seatList[0]; index ++){
-					totalSeats[seatList[index]].setReserved(name);
+			for(int seatIndex = 1; seatIndex <= seatList[0]; seatIndex ++){
+					totalSeats[seatList[seatIndex]].setReserved(name);
 					if(availableSeats > 0){
 						availableSeats --;
 					}
