@@ -1,9 +1,21 @@
 package TicketService;
 
 import java.util.Scanner;
+import java.util.TimerTask;
+import java.util.Timer;
 import java.io.*;
 
 public class Main {
+	private
+	static Timer timer;
+
+	public 
+	static void cancelTimer(){
+		timer.cancel();
+	}
+	static void restartTimer(){
+		timer = new Timer();
+	}
 
 	public static void main(String [] args) {
 		int numSeats = 0;
@@ -12,6 +24,8 @@ public class Main {
 		Scanner reader = new Scanner(System.in);
 		Venue event;
 		int availableSeats[];
+		TimerTask timerTask = new MyTimerTask();
+		timer = new Timer(true);
 
 		// default number of seats
 		if(args.length == 0){
@@ -63,8 +77,16 @@ public class Main {
 				customerName = reader.next();				
 				System.out.println("Enter number of seats to hold: ");
 				input = reader.nextInt();
-				event.holdSeats(customerName, input);
-				break;
+				availableSeats = event.checkAvailability(input);
+				if(availableSeats != null){
+					event.holdSeats(customerName, availableSeats);
+					System.out.println("Hold Seat for 30 seconds");
+					timer.scheduleAtFixedRate(timerTask, 0, 10*1000);
+				}
+				else {
+					System.out.println("*** Cannot complete order only " + event.getAvailabeSeats() + " seats available. \n ***");
+				}
+				break;				
 			case 3:	
 				System.out.println("Enter name: ");
 				customerName = reader.next();

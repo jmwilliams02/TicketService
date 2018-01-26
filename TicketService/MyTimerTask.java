@@ -4,14 +4,15 @@ import java.util.TimerTask;
 
 public class MyTimerTask extends TimerTask{
     public void run(){
-        System.out.println("Timer started");
         completeTask();
-        System.out.println("Timer finished");
     }
 
     private void completeTask(){
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10*3000);
+            System.out.println("Release seats");  
+            Main.cancelTimer(); 
+            Main.restartTimer();         
         }catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -7,6 +7,7 @@ public class Venue {
 		int numOfSeats;
 		int availableSeats = 0;
 		Seat[] totalSeats;
+		int [] heldSeatIndexes;
 		
 	public
 		Venue(){
@@ -30,21 +31,27 @@ public class Venue {
 		}
 	
 		// hold seats for customer for 90 seconds
-		boolean holdSeats(String name, int numberOfSeats){
-			if(numberOfSeats > 0 && numberOfSeats <= availableSeats){
-				int reserved = 0;
-				
-				while(reserved <= numberOfSeats){
-					for(int index = 0; index < availableSeats; index++){
-						if(totalSeats[index].isAvailable(index + 1)){
-							totalSeats[index].setReserved(name);
-						}
-							
-					}
+		void holdSeats(String name, int [] seatList){
+			for(int seatIndex = 1; seatIndex <= seatList[0]; seatIndex ++){
+				totalSeats[seatList[seatIndex]].setHold(name);
+				if(availableSeats > 0){
+					availableSeats --;
 				}
 			}
-			return true;
+
+			// copy array for later usage
+			heldSeatIndexes = seatList.clone();
 		}
+
+		void releaseHold(){
+			for(int index = 1; index < heldSeatIndexes[0]; index ++){
+				totalSeats[heldSeatIndexes[index]].free();
+				if(availableSeats <= numOfSeats){
+					availableSeats ++;
+				}
+			}
+		}
+
 		
 		// check seat availability
 		int [] checkAvailability(int amount){
