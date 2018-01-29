@@ -87,7 +87,7 @@ public class Main {
 				availableSeats = event.checkAvailability(input);
 				if(availableSeats != null){
 					event.holdSeats(customerName, availableSeats);
-					System.out.println("Hold Seat for 30 seconds");
+					System.out.println("Hold Seat for 90 seconds");
 					timer.scheduleAtFixedRate(timerTask, 0, 10*1000);
 				}
 				else {

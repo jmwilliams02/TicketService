@@ -27,7 +27,7 @@ After the application is started the seats are order in a sequential order ranki
 The user will be able to perform 3 transactions:
 1.  Get the number of available seats.
 2.  Find and hold the best seat available.
-3.  Reserve a specific group of held seats by the customer.
+3.  Reserve a specific group of seats by the customer.
 
 Assumptions:
 1.  No external database to hold customer request.
