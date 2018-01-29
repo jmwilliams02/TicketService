@@ -8,13 +8,21 @@ import java.io.*;
 public class Main {
 	private
 	static Timer timer;
+	static Venue event;	
 
 	public 
 	static void cancelTimer(){
+		int input;
 		timer.cancel();
 	}
-	static void restartTimer(){
-		timer = new Timer();
+
+	static void timerExpired(){
+		Scanner reader = new Scanner(System.in);
+		int input;
+
+		System.out.println("Timer expired");
+		System.out.println("Seats released");
+		event.releaseHold();
 	}
 
 	public static void main(String [] args) {
@@ -22,7 +30,6 @@ public class Main {
 		String customerName;
 		boolean endProgram = false;
 		Scanner reader = new Scanner(System.in);
-		Venue event;
 		int availableSeats[];
 		TimerTask timerTask = new MyTimerTask();
 		timer = new Timer(true);

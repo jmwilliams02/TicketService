@@ -44,7 +44,7 @@ public class Venue {
 		}
 
 		void releaseHold(){
-			for(int index = 1; index < heldSeatIndexes[0]; index ++){
+			for(int index = 1; index <= heldSeatIndexes[0]; index ++){
 				totalSeats[heldSeatIndexes[index]].free();
 				if(availableSeats <= numOfSeats){
 					availableSeats ++;
@@ -80,13 +80,5 @@ public class Venue {
 						availableSeats --;
 					}
 			}
-		}
-		
-		void incrementAvailabeSeats(){
-			
-		}
-		
-		void decrementAvailabeSeats(){
-			
 		}
 }

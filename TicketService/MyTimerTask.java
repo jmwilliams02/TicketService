@@ -10,9 +10,8 @@ public class MyTimerTask extends TimerTask{
     private void completeTask(){
         try {
             Thread.sleep(10*3000);
-            System.out.println("Release seats");  
             Main.cancelTimer(); 
-            Main.restartTimer();         
+            Main.timerExpired();         
         }catch (InterruptedException e) {
             e.printStackTrace();
         }
